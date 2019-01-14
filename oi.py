@@ -17,7 +17,19 @@ def read_input_mecanum ():
 	button_x = controller.getRawButton(8)
 	state["button_x_active"] = button_x
 
-	
+
+def read_input_velcrolastick ():
+	stick = wpilib.Joystick(1)
+	#VELCROLASTICK BUTTON
+	e = stick.getRawButton(4)
+	state["lift_up"] = e
+
+def read_input_linefollow ():
+	stick = wpilib.Joystick(1)
+	#LineFollow Button
+	y_button = stick.getRawButton(7)
+	state["button_y_on"] = y_button
+
 def read_input_cargo ():
 	stick = wpilib.Joystick(1)
 
@@ -30,3 +42,13 @@ def read_input_lift ():
 	
 	button_2_is_pressed = stick.getRawButton(6)
 	state["lift"] = button_2_is_pressed
+
+"""LINE FOLLOW"""
+
+def setup_for_robot (robot):
+	
+    robot.sensor_1_line = wpilib.DigitalInput(1)
+    robot.sensor_2_line = wpilib.DigitalInput(2)
+    robot.sensor_3_line = wpilib.DigitalInput(3)
+    robot.sensor_4_line = wpilib.DigitalInput(4)
+    robot.sensor_5_line = wpilib.DigitalInput(5)
