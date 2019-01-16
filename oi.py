@@ -47,8 +47,11 @@ def read_input_lift ():
 
 def setup_for_robot (robot):
 	
-    robot.sensor_1_line = wpilib.DigitalInput(1)
-    robot.sensor_2_line = wpilib.DigitalInput(2)
-    robot.sensor_3_line = wpilib.DigitalInput(3)
-    robot.sensor_4_line = wpilib.DigitalInput(4)
-    robot.sensor_5_line = wpilib.DigitalInput(5)
+    robot.sensor_EIZ_line = wpilib.DigitalInput(1)
+    robot.sensor_MIZ_line = wpilib.DigitalInput(2)
+    robot.sensor_MM_line = wpilib.DigitalInput(3)
+    robot.sensor_MDE_line = wpilib.DigitalInput(4)
+    robot.sensor_EDE_line = wpilib.DigitalInput(5)
+
+
+    

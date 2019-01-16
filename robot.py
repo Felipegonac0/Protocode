@@ -10,11 +10,16 @@ from oi import read_input_linefollow
 from oi import read_input_mecanum
 from oi import read_input_lift
 from oi import read_input_cargo
+from oi import setup_for_robot
 
 
 class MyRobot(wpilib.TimedRobot):
 
 	def robotInit(self):
+		#Linefollower
+
+		setup_for_robot(self)
+
 		#Velcrolastick
 		self.lift_motor1 = wpilib.Spark(6)
 		self.lift_motor2 = wpilib.Spark(7)
@@ -30,8 +35,6 @@ class MyRobot(wpilib.TimedRobot):
 		self.rearLeftMotor = wpilib.Talon(1)
 		self.frontRightMotor = wpilib.Talon(2)
 		self.rearRightMotor = wpilib.Talon(3)
-
-		self.sensor_1_mec = wpilib.DigitalInput(9)
 
 		self.frontLeftMotor.setInverted(True)
 
@@ -54,14 +57,7 @@ class MyRobot(wpilib.TimedRobot):
 
 		
 
-		if state["button_x_active"]:
-			if self.sensor_1.get():
-				self.drive.driveCartesian(0, 0, 0, 0)
-			else:
-				self.drive.driveCartesian(0, -1, 0, 0)
-
-		else:
-			self.drive.driveCartesian(x, y, z, 0)
+		self.drive.driveCartesian(x, y, z, 0)
 
 
 		read_input_cargo()
@@ -89,18 +85,18 @@ class MyRobot(wpilib.TimedRobot):
 
 		read_input_linefollow()
 		if state["button_y_on"]:
-			if self.sensor_1_line.get():
-				self.drive.arcadeDrive(0.7, 0)
-			elif self.sensor_2_line.get(): 
-				self.drive.arcadeDrive(0.4, 0)
-			elif self.sensor_4_line.get(): 
-				self.drive.arcadeDrive(-0.4, 0)
-			elif self.sensor_5_line.get(): 
-				self.drive.arcadeDrive(0.7, 0)
-			elif self.sensor_3_line.get(): 
-				self.drive.arcadeDrive(0, 0)
-		else:
-			self.drive.arcadeDrive(y, x)
+			if self.sensor_EIZ_line.get():
+				self.drive.driveCartesian(0.5, 0 ,0 ,0)
+			elif self.sensor_MIZ_line.get(): 
+				self.drive.driveCartesian(0.3, 0, 0, 0)
+			elif self.sensor_MM_line.get(): 
+				self.drive.driveCartesian(0, 0, 0, 0)
+			elif self.sensor_MDE_line.get():
+				self.drive.driveCartesian(-0.3, 0, 0, 0)
+			elif self.sensor_EDE_line.get(): 
+				self.drive.driveCartesian(-0.5, 0, 0, 0)
+		
+
 		read_input_velcrolastick()
 		if state["lift_up"]:
 			state["timer"] += 1
